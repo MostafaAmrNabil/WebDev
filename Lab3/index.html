@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>iOS-style Calculator (HTML + CSS)</title>
+  <script src="test.js"></script>
+  <style>
+    :root{
+      --bg: #0b0b0d;
+      --panel: linear-gradient(180deg,#1f1f22 0%, #141416 100%);
+      --screen-bg: rgba(255,255,255,0.04);
+      --digit: #fff;
+      --secondary: rgba(255,255,255,0.55);
+      --btn-dark: linear-gradient(180deg,#2b2b2f,#1f1f22);
+      --btn-light: linear-gradient(180deg,#3b3b3f,#2a2a2d);
+      --accent: linear-gradient(180deg,#ff9a00,#ff7a00);
+      --glass: rgba(255,255,255,0.04);
+      --radius: 26px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      background: radial-gradient(1200px 800px at 10% 10%, rgba(255,255,255,0.02), transparent), var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px;
+    }
+
+    /* Calculator frame */
+    .calc {
+      width:360px;
+      max-width:92vw;
+      background: var(--panel);
+      border-radius: calc(var(--radius) + 6px);
+      padding:18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    /* Top speaker + screen area */
+    .top {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .speaker {
+      width:54px; height:8px; border-radius:999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow: inset 0 -2px 6px rgba(0,0,0,0.6);
+    }
+    .brand {
+      color:var(--secondary);
+      font-size:12px;
+      letter-spacing:0.6px;
+    }
+
+    /* Display */
+    .screen {
+      background: var(--screen-bg);
+      border-radius: 20px;
+      padding:16px 18px;
+      margin-bottom:18px;
+      min-height:84px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      box-shadow: inset 0 -8px 18px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+    .screen .history{
+      color:var(--secondary);
+      font-size:14px;
+      text-align:right;
+      opacity:0.85;
+      margin-bottom:6px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .screen .current{
+      color:var(--digit);
+      font-size:44px;
+      font-weight:600;
+      text-align:right;
+      line-height:1;
+      letter-spacing:0.4px;
+      word-break:break-all;
+    }
+
+    /* Buttons grid */
+    .keys {
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+
+    button.btn{
+      appearance:none;
+      border:0;
+      padding:18px 0;
+      border-radius:14px;
+      font-size:20px;
+      font-weight:600;
+      background: var(--btn-dark);
+      color:var(--digit);
+      box-shadow: 0 8px 0 rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.45), inset 0 1px rgba(255,255,255,0.02);
+      transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+      cursor:pointer;
+      user-select:none;
+    }
+
+    button.btn:active{
+      transform: translateY(4px);
+      box-shadow: 0 4px 0 rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.45);
+      filter:brightness(0.98);
+    }
+
+    /* Variants */
+    .btn-light { background: var(--btn-light); color:var(--digit); font-weight:600; }
+    .btn-accent { background: var(--accent); color:#fff; box-shadow: 0 10px 0 rgba(0,0,0,0.5); }
+    .btn-operand { background: linear-gradient(180deg,#1f1f22,#131314); color:var(--secondary); font-weight:700; }
+
+    /* Wide zero */
+    .btn-zero { grid-column: 1 / span 2; border-radius: 18px; text-align:center; padding-left:34px; }
+
+    /* Special sizes */
+    .small { font-size:16px; padding:12px 0; }
+
+    /* Responsive tweaks */
+    @media (max-width:420px){
+      .calc { width:320px; padding:14px; }
+      .screen .current{ font-size:36px; }
+      button.btn{ padding:14px 0; font-size:18px; }
+    }
+
+    /* Decorative subtle glass effect */
+    .calc:after{
+      content:"";
+      position:absolute;
+      width:340px; height:360px;
+      left:calc(50% - 170px);
+      top:calc(50% - 180px);
+      pointer-events:none;
+      background: radial-gradient(400px 300px at 20% 10%, rgba(255,255,255,0.02), transparent);
+      border-radius:calc(var(--radius) + 6px);
+      mix-blend-mode:overlay;
+      filter: blur(6px) saturate(1.05);
+      opacity:0.6;
+    }
+
+  </style>
+</head>
+<body>
+  <main class="calc" role="application" aria-label="iOS-style calculator">
+    <div class="top">
+      <div class="speaker" aria-hidden="true"></div>
+      <div class="brand">Calculator</div>
+    </div>
+
+    <section class="screen" aria-live="polite">
+      
+      <div class="current">0</div>
+    </section>
+
+    <section class="keys" role="group" aria-label="Calculator keys">
+      <button class="btn btn-light small" aria-label="clear" onclick="cleardisplay()">AC</button>
+      <button class="btn btn-light small" aria-label="plus minus">±</button>
+      <button class="btn btn-light small" aria-label="percent">%</button>
+      <button class="btn btn-accent" aria-label="divide" onclick="appendnumber('/')">÷</button>
+
+      <button class="btn" aria-label="7" onclick="appendnumber(7)">7</button>
+      <button class="btn" aria-label="8" onclick="appendnumber(8)">8</button>
+      <button class="btn" aria-label="9" onclick="appendnumber(9)">9</button>
+      <button class="btn btn-accent" aria-label="multiply" onclick="appendnumber('*')">×</button>
+
+      <button class="btn" aria-label="4" onclick="appendnumber(4)">4</button>
+      <button class="btn" aria-label="5" onclick="appendnumber(5)">5</button>
+      <button class="btn" aria-label="6" onclick="appendnumber(6)">6</button>
+      <button class="btn btn-accent" aria-label="minus" onclick="appendnumber('-')">−</button>
+
+      <button class="btn" aria-label="1" onclick="appendnumber(1)">1</button>
+      <button class="btn" aria-label="2" onclick="appendnumber(2)">2</button>
+      <button class="btn" aria-label="3" onclick="appendnumber(3)">3</button>
+      <button class="btn btn-accent" aria-label="plus" onclick="appendnumber('+')">+</button>
+
+      <button class="btn btn-zero" aria-label="zero" onclick="appendnumber(0)">0</button>
+      <button class="btn" aria-label="decimal">.</button>
+      <button class="btn btn-accent" aria-label="equals" onclick="compute()">=</button>
+    </section>
+  </main>
+
+  <!--
+    This is a *design-only* iOS-style calculator using HTML + CSS only.
+    It intentionally contains no JavaScript — the buttons are non-functional.
+
+    If you'd like, I can:
+      - add JavaScript to make it work exactly like the iOS calculator
+      - add keyboard support and accessibility improvements
+      - export a screenshot or a printable version
+  -->
+</body>
+</html>

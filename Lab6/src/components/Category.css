@@ -1,0 +1,120 @@
+.category-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 4rem 2rem;
+    gap: 2rem;
+}
+
+.category-text {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.category-text h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #1c1d1f;
+}
+
+.category-text p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #4b4b4b;
+}
+
+.category-cards {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    /* horizontal scroll */
+    scroll-behavior: smooth;
+    /* smooth scroll */
+    padding-bottom: 1rem;
+    /* space for scrollbar */
+    flex-wrap: nowrap;
+    /* keep cards in a single row */
+}
+
+/* Optional: hide scrollbar for a cleaner look */
+.category-cards::-webkit-scrollbar {
+    height: 6px;
+}
+
+.category-cards::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.category-cards::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+
+.topic-card {
+    width: 16rem;
+    /* set width explicitly */
+    height: 20rem;
+    /* 2x height for portrait */
+    border-radius: 1.6rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0.8rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+}
+
+.topic-card-info {
+    background: white;
+    /* white overlay */
+    padding: 0.6rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: black;
+    /* text color */
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+
+}
+
+.topic-card-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topic-card-title-container h4 {
+    font-size: 1.1rem;
+    font-weight: 200;
+}
+
+.tag svg {
+    fill: black;
+    /* icon color black */
+}
+
+.topic-card-arrow svg {
+    width: 16px;
+    height: 16px;
+    fill: black;
+}

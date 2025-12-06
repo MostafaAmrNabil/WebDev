@@ -1,0 +1,41 @@
+.partners-banner_content {
+    background-color: #f2f2f2;
+    /* light grey background */
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.partners-banner_heading {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #1c1d1f;
+}
+
+.partner-logos_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    /* space between logos */
+    align-items: center;
+}
+
+.partner-logos_item img {
+    max-height: 40px;
+    object-fit: contain;
+    display: block;
+}
+
+.partners-banner_heading {
+    color: oklch(48.09% .0371 279.08deg);
+    font-weight: 400;
+    margin-block-end: 2.4rem;
+    font-size: medium;
+    max-inline-size: 100%;
+    text-align: center;
+    /* keep centered */
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Category.css"; // make sure this matches your CSS file
+import "./Category.css"; 
 import { FaUserFriends, FaArrowRight } from "react-icons/fa";
 
 function Categories({ categories }) {

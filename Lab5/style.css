@@ -1,0 +1,110 @@
+/* Basic reset and global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* App container styling */
+.App {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+h1 {
+  color: #007bff;
+  margin-bottom: 25px;
+}
+
+/* Form element styling */
+input[type="text"],
+input[type="number"],
+textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* Movie Item styling */
+.movie-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  text-align: left;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-item h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.movie-item p {
+  margin-top: 5px;
+  font-style: italic;
+  color: #666;
+}
+
+.movie-item div {
+  margin-bottom: 10px;
+}
+
+.movie-item button {
+  background-color: #dc3545;
+  align-self: flex-end; /* Align the remove button to the right */
+  padding: 8px 12px;
+}
+
+.movie-item button:hover {
+  background-color: #c82333;
+}
+
+/* Movie List container */
+.list {
+  margin-top: 20px;
+}
+
+.list > p {
+  color: #888;
+  text-align: center;
+  padding: 10px;
+}
